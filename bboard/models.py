@@ -1,4 +1,12 @@
+from django.core import validators
+from django.core.exceptions import ValidationError
 from django.db import models
+
+
+def validate_even(val):
+    if val % 2 != 0:
+        raise ValidationError('Число %(value)s нечётное', code='odd',
+                              params={'value': val})
 
 
 class Rubric(models.Model):
@@ -24,22 +32,22 @@ class Bb(models.Model):
     #     ('c', 'Обменяю'),
     # )
 
-    # KINDS = (
-    #     ('Купля-продажа', (
-    #         ('b', 'Куплю'),
-    #         ('s', 'Продам'),
-    #     )),
-    #     ('Обмен', (
-    #         ('c', 'Обменяю'),
-    #     )),
-    # )
-
     KINDS = (
-        (None, 'Выберите тип публикуемого объявления'),
-        ('b', 'Куплю'),
-        ('s', 'Продам'),
-        ('c', 'Обменяю'),
+        ('Купля-продажа', (
+            ('b', 'Куплю'),
+            ('s', 'Продам'),
+        )),
+        ('Обмен', (
+            ('c', 'Обменяю'),
+        )),
     )
+
+    # KINDS = (
+    #     (None, 'Выберите тип публикуемого объявления'),
+    #     ('b', 'Куплю'),
+    #     ('s', 'Продам'),
+    #     ('c', 'Обменяю'),
+    # )
 
     kind = models.CharField(
         max_length=1,
@@ -51,6 +59,10 @@ class Bb(models.Model):
     title = models.CharField(
         max_length=50,
         verbose_name='Товар',
+        validators=[
+            validators.RegexValidator(regex='^.{4,}$'),
+        ],
+        error_messages={'invalid': 'Введите не менее 4 символов'}
     )
 
     content = models.TextField(
@@ -65,6 +77,7 @@ class Bb(models.Model):
         null=True,
         blank=True,
         verbose_name='Цена',
+        validators=[validate_even],
     )
 
     published = models.DateTimeField(
@@ -74,7 +87,9 @@ class Bb(models.Model):
     )
 
     rubric = models.ForeignKey(
+        # Rubric,
         'Rubric',
+        # 'bboard.Rubric',
         null=True,
         on_delete=models.PROTECT,
         verbose_name='Рубрика',
@@ -82,6 +97,33 @@ class Bb(models.Model):
 
     def __str__(self):
         return f'Объявление: {self.title}'
+
+    # def save(self, *args, **kwargs):
+    #     if self.is_model_correct():
+    #         super().save(*args, **kwargs)
+
+    # def delete(self, *args, **kwargs):
+    #     if self.need_to_delete():
+    #         super().delete(*args, **kwargs)
+
+    def title_and_price(self):
+        if self.price:
+            return f'{self.title} ({self.price})'
+        else:
+            return self.title
+
+    title_and_price.short_description = 'Название и цена'
+
+    def clean(self):
+        errors = {}
+        if not self.content:
+            errors['content'] = ValidationError('Укажите описание товара')
+
+        if self.price and self.price < 0:
+            errors['price'] = ValidationError('Укажите неотрицательное значение цены')
+
+        if errors:
+            raise ValidationError(errors)
 
     class Meta:
         verbose_name = 'Объявление'
