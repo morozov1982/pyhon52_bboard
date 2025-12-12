@@ -20,7 +20,7 @@
         <a href="{% url 'add' %}">Добавить</a>
         {% for rubric in rubrics %}
             {# <a href="{{ rubric.pk }}/">{{ rubric.name }}</a> #}
-            <a href="{% url 'by_rubric' rubric.pk %}">{{ rubric.name }}</a>
+            <a href="{% url 'by_rubric' rubric.pk %}">{{ rubric.name }} ({{ rubric.cnt }})</a>
         {% endfor %}
     </nav>
 

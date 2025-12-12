@@ -1,3 +1,4 @@
+from django.db.models import Count
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
@@ -10,7 +11,8 @@ from bboard.models import Bb, Rubric
 def index(request):
     # template = loader.get_template('index.html')
     bbs = Bb.objects.all()
-    rubrics = Rubric.objects.all()
+    # rubrics = Rubric.objects.all()
+    rubrics = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
     context = {'bbs': bbs, 'rubrics': rubrics}
 
     # return HttpResponse(template.render(context, request))
@@ -19,7 +21,8 @@ def index(request):
 
 def by_rubric(request, rubric_id):
     bbs = Bb.objects.filter(rubric=rubric_id)
-    rubrics = Rubric.objects.all()
+    # rubrics = Rubric.objects.all()
+    rubrics = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
     current_rubric = Rubric.objects.get(pk=rubric_id)
     context = {'bbs': bbs, 'rubrics': rubrics, 'current_rubric':current_rubric}
 
@@ -34,5 +37,6 @@ class BbCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['rubrics'] = Rubric.objects.all()
+        # context['rubrics'] = Rubric.objects.all()
+        context['rubrics'] = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
         return context
