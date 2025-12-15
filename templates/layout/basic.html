@@ -15,12 +15,13 @@
     </header>
 
     <nav>
-        {# <a href="/">Главная</a> #}
-        <a href="{% url 'index' %}">Главная</a>
-        <a href="{% url 'add' %}">Добавить</a>
+        <a href="{% url 'bboard:index' %}">Главная</a>
+        <a href="{% url 'bboard:add' %}">Добавить</a>
+
+        <a href="{% url 'admin:index' %}">Админка</a>
+
         {% for rubric in rubrics %}
-            {# <a href="{{ rubric.pk }}/">{{ rubric.name }}</a> #}
-            <a href="{% url 'by_rubric' rubric.pk %}">{{ rubric.name }} ({{ rubric.cnt }})</a>
+            <a href="{% url 'bboard:by_rubric' rubric.pk %}">{{ rubric.name }} ({{ rubric.cnt }})</a>
         {% endfor %}
     </nav>
 
