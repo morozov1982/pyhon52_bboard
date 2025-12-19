@@ -2,7 +2,7 @@ from django.urls import path, re_path
 
 from bboard.views import (index, by_rubric,
     # BbCreateView,
-                          add_save, add, add_and_save)
+                          add_save, add, add_and_save, bb_detail)
 
 app_name = 'bboard'
 
@@ -14,6 +14,9 @@ urlpatterns = [
     path('add/', add_and_save, name='add'),
 
     path('<int:rubric_id>/', by_rubric, name='by_rubric'),
+
+    path('<int:bb_id>/', bb_detail, name='bb_detail'),
+
     path('', index, name='index'),
 ]
 

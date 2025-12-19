@@ -1,10 +1,11 @@
 from django.db.models import Count
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.template.loader import get_template, render_to_string
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView
+from django.views.decorators.http import require_GET, require_POST, require_safe, require_http_methods
 
 from bboard.forms import BbForm
 from bboard.models import Bb, Rubric
@@ -34,14 +35,22 @@ from bboard.models import Bb, Rubric
 #     return HttpResponse(template.render(context, request))
 
 
+# def index(request):
+#     bbs = Bb.objects.all()
+#     rubrics = Rubric.objects.all()
+#     context = {'bbs': bbs, 'rubrics': rubrics}
+#     return HttpResponse(render_to_string('index.html', context, request))
+
+
 def index(request):
     bbs = Bb.objects.all()
-    rubrics = Rubric.objects.all()
+    rubrics = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
     context = {'bbs': bbs, 'rubrics': rubrics}
-    return HttpResponse(render_to_string('index.html', context, request))
+    return render(request, 'index.html', context)
 
 
 def by_rubric(request, rubric_id):
+    # bbs = get_list_or_404(Bb, rubric_id)
     bbs = Bb.objects.filter(rubric=rubric_id)
     # rubrics = Rubric.objects.all()
     rubrics = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
@@ -83,6 +92,10 @@ def add_save(request):
         return render(request, 'create.html', context)
 
 
+# @require_GET()
+# @require_POST()
+# @require_safe()
+@require_http_methods(['GET', 'POST'])
 def add_and_save(request):
     if request.method == 'POST':
         bbf = BbForm(request.POST)
@@ -99,3 +112,13 @@ def add_and_save(request):
         bbf = BbForm()
         context = {'form': bbf}
         return render(request, 'create.html', context)
+
+
+def bb_detail(request, bb_id):
+    bb = get_object_or_404(Bb, pk=bb_id)
+
+    rubrics = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
+    context = {'bb': bb, 'rubrics': rubrics}
+
+    return render(request, 'bb_detail.html', context)
+
