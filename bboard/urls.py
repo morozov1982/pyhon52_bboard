@@ -1,32 +1,16 @@
-from django.urls import path, re_path
-from django.views.generic import CreateView
+from django.urls import path
 
-from bboard.models import Bb
-from bboard.views import (index, by_rubric,
+from bboard.views import (index,
                           BbCreateView, BbRubricBbsView,
-                          add_save, add, add_and_save, bb_detail)
+                          BbDetailView, BbUpdateView, BbDeleteView)
 
 app_name = 'bboard'
 
 urlpatterns = [
     path('add/', BbCreateView.as_view(), name='add'),
-    # path('add/', CreateView.as_view(model=Bb,
-    #                                 template_name='create.html'), name='add'),
-
-    # path('add/save/', add_save, name='add_save'),
-    # path('add/', add, name='add'),
-    # path('add/', add_and_save, name='add'),
-
-    # path('<int:rubric_id>/', by_rubric, name='by_rubric'),
+    path('update/<int:pk>/', BbUpdateView.as_view(), name='update'),
+    path('delete/<int:pk>/', BbDeleteView.as_view(), name='delete'),
     path('<int:rubric_id>/', BbRubricBbsView.as_view(), name='by_rubric'),
-
-    path('<int:bb_id>/', bb_detail, name='bb_detail'),
-
+    path('detail/<int:pk>/', BbDetailView.as_view(), name='detail'),
     path('', index, name='index'),
 ]
-
-# urlpatterns = [
-#     re_path(r'^add/$', BbCreateView.as_view(), name='add'),
-#     re_path(r'^(?P<rubric_id>[0-9]*)/$', by_rubric, name='by_rubric'),
-#     re_path(r'^$', index, name='index'),
-# ]
