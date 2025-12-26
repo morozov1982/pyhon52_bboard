@@ -6,7 +6,9 @@
     <meta charset="UTF-8">
     <title>{% block title %}Главная{% endblock %} :: Доска объявлений</title>
 
-    <link rel="stylesheet" href="{% static 'style.css' %}">
+    {% static 'style.css' as css_url %}
+    {# <link rel="stylesheet" href="{% static 'style.css' %}"> #}
+    <link rel="stylesheet" href="{{ css_url }}">
 </head>
 <body>
 
@@ -14,19 +16,11 @@
         <h1>Объявления</h1>
     </header>
 
-    <nav>
-        <a href="{% url 'bboard:index' %}">Главная</a>
-        <a href="{% url 'bboard:add' %}">Добавить</a>
-
-        <a href="{% url 'admin:index' %}">Админка</a>
-
-        {% for rubric in rubrics %}
-            <a href="{% url 'bboard:by_rubric' rubric.pk %}">{{ rubric.name }} ({{ rubric.cnt }})</a>
-        {% endfor %}
-    </nav>
+    {% include 'inc/main_menu.html' %}
 
     <section>
         {% block content %}
+            <p>Содержимое базового шаблона</p>
         {% endblock %}
     </section>
 

@@ -2,18 +2,29 @@
 
 {% block title %}{{ current_rubric.name }}{% endblock %}
 
+
+{% comment 'Доделать завтра!' %}
+<p>Здесь будет список объявлений</p>
+{% endcomment %}
+
 {% block content %}
     <h2>Рубрика: {{ current_rubric.name }}</h2>
 
     {% for bb in bbs %}
     <div>
-        <h2>
-            <a href="{% url 'bboard:detail' pk=bb.pk %}">
+        <h2>{{ forloop.counter }}.
+            {% url 'bboard:detail' bb.pk as detail_url %}
+
+            {# <a href="{% url 'bboard:detail' pk=bb.pk %}"> #}
+            {# <a href="{% url 'bboard:detail' bb.pk %}"> #}
+            <a href="{{ detail_url }}">
                 {{ bb.title }}
             </a>
         </h2>
         <p>{{ bb.content }}</p>
         <p>{{ bb.published|date:"d.m.Y H:i:s" }}</p>
     </div>
+    {% empty %}
+        <h2>Объявлений нет</h2>
     {% endfor %}
 {% endblock %}

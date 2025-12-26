@@ -1,0 +1,11 @@
+<nav>
+    <a href="{% url 'bboard:index' %}">Главная</a>
+    <a href="{% url 'bboard:add' %}">Добавить</a>
+
+    <a href="{% url 'admin:index' %}">Админка</a>
+
+    {% for rubric in rubrics %}
+        <a href="{% url 'bboard:by_rubric' rubric.pk %}">
+            {{ rubric.name }} ({{ rubric.cnt }})</a>
+    {% endfor %}
+</nav>
