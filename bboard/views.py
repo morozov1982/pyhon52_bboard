@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.db.models import Count
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.http import HttpResponse, HttpResponseRedirect
@@ -13,42 +14,21 @@ from django.views.decorators.http import require_GET, require_POST, require_safe
 from bboard.forms import BbForm
 from bboard.models import Bb, Rubric
 
-# def index(request):
-#     # template = loader.get_template('index.html')
-#     bbs = Bb.objects.all()
-#     # rubrics = Rubric.objects.all()
-#     rubrics = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
-#     context = {'bbs': bbs, 'rubrics': rubrics}
-#
-#     # return HttpResponse(template.render(context, request))
-#     return render(request, 'index.html', context)
-
-
-# def index(request):
-#     resp = HttpResponse('Здесь будет', content_type='text/plain; charset=utf-8')
-#     resp.writelines((' страница', ' сайта'))
-#     resp['keywords'] = 'Python, Django'
-#     return resp
-
-# def index(request):
-#     bbs = Bb.objects.all()
-#     rubrics = Rubric.objects.all()
-#     context = {'bbs': bbs, 'rubrics': rubrics}
-#     template = get_template('index.html')
-#     return HttpResponse(template.render(context, request))
-
-
-# def index(request):
-#     bbs = Bb.objects.all()
-#     rubrics = Rubric.objects.all()
-#     context = {'bbs': bbs, 'rubrics': rubrics}
-#     return HttpResponse(render_to_string('index.html', context, request))
-
 
 def index(request):
-    bbs = Bb.objects.all()
     rubrics = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
-    context = {'bbs': bbs, 'rubrics': rubrics}
+
+    bbs = Bb.objects.all()
+    paginator = Paginator(bbs, 2)
+
+    if 'page' in request.GET:
+        page_num = request.GET['page']
+    else:
+        page_num = 1
+
+    page = paginator.get_page(page_num)
+
+    context = {'bbs': page.object_list, 'page': page, 'rubrics': rubrics}
     return render(request, 'index.html', context)
 
 
