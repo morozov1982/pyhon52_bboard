@@ -71,7 +71,8 @@ def add_and_save(request):
         bbf = BbForm(request.POST)
 
         if bbf.is_valid():
-            bbf.save()
+            if bbf.has_changed():
+                bbf.save()
             return HttpResponseRedirect(reverse(
                 'bboard:by_rubric',
                 kwargs={'rubric_id': bbf.cleaned_data['rubric'].pk}))
@@ -80,6 +81,7 @@ def add_and_save(request):
             return render(request, 'create.html', context)
     else:
         bbf = BbForm()
+        # bbf = BbForm(initial={'price': 1000.0})
         context = {'form': bbf}
         return render(request, 'create.html', context)
 
@@ -119,6 +121,7 @@ def add_and_save(request):
 class BbCreateView(CreateView):
     template_name = 'create.html'
     form_class = BbForm
+    initial = {'price': 0}
     success_url = '/'
 
     def get_context_data(self, **kwargs):
