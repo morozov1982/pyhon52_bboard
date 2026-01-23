@@ -1,7 +1,7 @@
 from django import forms
 from django.core import validators
 from django.core.exceptions import ValidationError
-from django.forms import ModelForm, modelform_factory, DecimalField
+from django.forms import ModelForm, modelform_factory, DecimalField, modelformset_factory
 from django.forms.widgets import Select
 from bboard.models import Bb, Rubric
 
@@ -98,3 +98,11 @@ class BbForm(ModelForm):
         model = Bb
         fields = ('title', 'content', 'price', 'rubric')
         labels = {'title': 'Название товара'}
+
+
+RubricFormSet = modelformset_factory(
+    Rubric,
+    fields=('name',),
+    can_order=True,
+    can_delete=True,
+)

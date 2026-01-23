@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator
 from django.db.models import Count
-from django.shortcuts import render, get_object_or_404, get_list_or_404
+from django.shortcuts import render, get_object_or_404, get_list_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.template.loader import get_template, render_to_string
@@ -11,7 +11,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.decorators.http import require_GET, require_POST, require_safe, require_http_methods
 
-from bboard.forms import BbForm
+from bboard.forms import BbForm, RubricFormSet
 from bboard.models import Bb, Rubric
 
 
@@ -193,3 +193,26 @@ class BbDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['rubrics'] = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
         return context
+
+
+def rubrics(request):
+    if request.method == 'POST':
+        formset = RubricFormSet(request.POST)
+        if formset.is_valid():
+            formset.save(commit=False)
+            for form in formset:
+                if form.cleaned_data:
+                    rubric = form.save(commit=False)
+                    if rubric in formset.deleted_objects:
+                        rubric.delete()
+                    else:
+                        if form['ORDER'].data:
+                            rubric.order = form['ORDER'].data
+                        rubric.save()
+
+            return redirect('bboard:index')
+    else:
+        formset = RubricFormSet()
+    context = {'formset': formset}
+    return render(request, 'bboard/rubrics.html', context)
+
