@@ -1,3 +1,4 @@
+from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
 
 from bboard.views import (index,
@@ -16,5 +17,9 @@ urlpatterns = [
     path('delete/<int:pk>/', BbDeleteView.as_view(), name='delete'),
     path('<int:rubric_id>/', BbRubricBbsView.as_view(), name='by_rubric'),
     path('detail/<int:pk>/', BbDetailView.as_view(), name='detail'),
+
+    path('accounts/login/', LoginView.as_view(), name='login'),
+    path('accounts/logout/', LogoutView.as_view(next_page='bboard:index'), name='logout'),
+
     path('', index, name='index'),
 ]

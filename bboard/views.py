@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
 from django.core.paginator import Paginator
 from django.db.models import Count
 from django.forms import inlineformset_factory
@@ -120,10 +122,17 @@ def add_and_save(request):
 
 
 class BbCreateView(CreateView):
+# class BbCreateView(LoginRequiredMixin, CreateView):
+# class BbCreateView(UserPassesTestMixin, CreateView):
+# class BbCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'create.html'
     form_class = BbForm
     initial = {'price': 0}
     success_url = '/'
+    # permission_required = ('bboard.add_bb', 'bboard.change_bb')
+
+    # def test_func(self):
+    #     return self.request.user.is_staff
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -218,6 +227,11 @@ def rubrics(request):
     return render(request, 'bboard/rubrics.html', context)
 
 
+# @login_required
+# @login_required(login_url='/login/')
+# @user_passes_test(lambda user: user.is_staff)
+# @permission_required('bboard.add_rubric')
+# @permission_required(('bboard.add_rubric', 'bboard.add_bb'))
 def bbs(request, rubric_id):
     BbsFormSet = inlineformset_factory(Rubric, Bb, form=BbForm, extra=1)
     rubric = Rubric.objects.get(pk=rubric_id)
