@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import CASCADE
+
 
 class AdvUser(models.Model):
     is_activated = models.BooleanField(
@@ -24,7 +26,14 @@ class Spare(models.Model):
 
 class Machine(models.Model):
     name = models.CharField(max_length=30)
-    spares = models.ManyToManyField(Spare)
+    spares = models.ManyToManyField(Spare, through='Kit',
+                        through_fields=('machine', 'spare'))
 
     def __str__(self):
         return f'{self.name}'
+
+
+class Kit(models.Model):
+    machine = models.ForeignKey(Machine, on_delete=CASCADE)
+    spare = models.ForeignKey(Spare, on_delete=CASCADE)
+    count = models.IntegerField()
