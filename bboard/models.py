@@ -30,6 +30,12 @@ class Rubric(models.Model):
         ordering = ('order', 'name')
 
 
+class RevRubric(Rubric):
+    class Meta:
+        proxy = True
+        ordering = ['-name']
+
+
 class Bb(models.Model):
     # KINDS = (
     #     ('b', 'Куплю'),

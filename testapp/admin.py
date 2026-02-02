@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from testapp.models import Spare, Machine, Note
+
+admin.site.register(Spare)
+admin.site.register(Machine)
+admin.site.register(Note)
