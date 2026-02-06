@@ -3,6 +3,31 @@ from django.core.exceptions import ValidationError
 from django.db import models
 
 
+class RubricQuerySet(models.QuerySet):
+    def order_by_bb_count(self):
+        return self.annotate(
+            cnt=models.Count('bb')).order_by('-cnt')
+
+
+class RubricManager(models.Manager):
+    # def get_queryset(self):
+    #     return super().get_queryset().order_by('order', 'name')
+
+    # def order_by_bb_count(self):
+    #     return super().get_queryset().annotate(
+    #         cnt=models.Count('bb')).order_by('-cnt')
+    def get_queryset(self):
+        return RubricQuerySet(self.model, using=self._db)
+
+    def order_by_bb_count(self):
+        return self.get_queryset().order_by_bb_count()
+
+
+class BbManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().order_by('price')
+
+
 def validate_even(val):
     if val % 2 != 0:
         raise ValidationError('Число %(value)s нечётное', code='odd',
@@ -20,6 +45,12 @@ class Rubric(models.Model):
         default=0,
         db_index=True,
     )
+
+    objects = models.Manager()
+    bbs = RubricManager()
+
+    # objects = RubricQuerySet.as_manager()
+    # objects = models.Manager.from_queryset(RubricQuerySet)()
 
     def __str__(self):
         return self.name
@@ -105,6 +136,9 @@ class Bb(models.Model):
         on_delete=models.PROTECT,
         verbose_name='Рубрика',
     )
+
+    objects = models.Manager()
+    by_price = BbManager()
 
     def __str__(self):
         return f'Объявление: {self.title}'
