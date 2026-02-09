@@ -23,4 +23,5 @@ urlpatterns = [
 
     path('', include('bboard.urls', namespace='bboard')),
     # path('testapp', include('testapp.urls', namespace='testapp')),
+    path('captcha/', include('captcha.urls')),
 ]

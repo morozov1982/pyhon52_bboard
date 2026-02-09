@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'captcha',
+
     'bboard',
     'testapp',
 ]
@@ -139,3 +141,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # LOGIN_URL = "/accounts/login/"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = '/'
+
+# CAPTCHA
+CAPTCHA_LENGTH = 8
+CAPTCHA_BACKGROUND_COLOR = "#ff0000"
+CAPTCHA_FOREGROUND_COLOR = "#ff00ff"
+CAPTCHA_LETTER_ROTATION = (-180, 180)
+CAPTCHA_FONT_SIZE = 58
+CAPTCHA_IMAGE_SIZE = (600, 250)

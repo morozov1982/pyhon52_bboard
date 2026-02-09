@@ -14,7 +14,7 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.decorators.http import require_GET, require_POST, require_safe, require_http_methods
 
-from bboard.forms import BbForm, RubricFormSet
+from bboard.forms import BbForm, RubricFormSet, SearchForm
 from bboard.models import Bb, Rubric
 
 
@@ -244,3 +244,21 @@ def bbs(request, rubric_id):
         formset = BbsFormSet(instance=rubric)
     context = {'formset': formset, 'current_rubric': rubric}
     return render(request, 'bboard/bbs.html', context)
+
+
+def search(request):
+    if request.method == 'POST':
+        sf = SearchForm(request.POST)
+        if sf.is_valid():
+            keyword = sf.cleaned_data['keyword']
+            rubric_id = sf.cleaned_data['rubric'].pk
+            # bbs = Bb.objects.filter(title__icontains=keyword,
+            #                         rubric=rubric_id)
+            bbs = Bb.objects.filter(title__iregex=keyword,
+                                    rubric=rubric_id)
+            context = {'bbs': bbs, 'form': sf}
+            return render(request, 'bboard/search.html', context)
+    else:
+        sf = SearchForm()
+    context = {'form': sf}
+    return render(request, 'bboard/search.html', context)

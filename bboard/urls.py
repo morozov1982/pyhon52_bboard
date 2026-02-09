@@ -3,7 +3,7 @@ from django.urls import path
 
 from bboard.views import (index,
                           BbCreateView, BbRubricBbsView,
-                          BbDetailView, BbUpdateView, BbDeleteView, rubrics, bbs)
+                          BbDetailView, BbUpdateView, BbDeleteView, rubrics, bbs, search)
 
 app_name = 'bboard'
 
@@ -22,4 +22,6 @@ urlpatterns = [
     path('accounts/logout/', LogoutView.as_view(next_page='bboard:index'), name='logout'),
 
     path('', index, name='index'),
+
+    path('search/', search, name='search'),
 ]

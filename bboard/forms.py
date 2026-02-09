@@ -1,3 +1,4 @@
+from captcha.fields import CaptchaField
 from django import forms
 from django.core import validators
 from django.core.exceptions import ValidationError
@@ -74,6 +75,11 @@ class BbForm(ModelForm):
         help_text='Не забудьте выбрать рубрику!',
         widget=forms.widgets.Select(attrs={'size': 8})
     )
+    # captcha = CaptchaField(
+    #     # generator='captcha.helpers.math_challenge',
+    #     label='Введите текст с картинки',
+    #     error_messages={'invalid': 'Неправильный текст'}
+    # )
 
     def clean_title(self):
         val = self.cleaned_data['title']
@@ -106,3 +112,8 @@ RubricFormSet = modelformset_factory(
     can_order=True,
     can_delete=True,
 )
+
+
+class SearchForm(forms.Form):
+    keyword = forms.CharField(max_length=20, label='Искомое слово')
+    rubric = forms.ModelChoiceField(queryset=Rubric.objects.all(), label='Рубрика')
