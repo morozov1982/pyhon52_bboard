@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>{% block title %}Главная{% endblock %} :: Доска объявлений</title>
 
-    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" crossorigin="anonymous">
 
     {% static 'style.css' as css_url %}
     {# <link rel="stylesheet" href="{% static 'style.css' %}"> #}
@@ -27,7 +27,7 @@
     </section>
 
 
-<script src="bootstrap/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}" crossorigin="anonymous"></script>
 
 </body>
 </html>

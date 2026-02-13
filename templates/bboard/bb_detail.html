@@ -4,17 +4,17 @@
 
 {% block content %}
 
-    <p>Рубрика: {{ bb.rubric.name }}</p>
+    <p><strong>Рубрика:</strong> {{ bb.rubric.name }}</p>
     <h2>{{ bb.title }}</h2>
     <p>{{ bb.content }}</p>
     <p>Цена: {{ bb.price|floatformat:'2g' }}</p>
 
     <p>
         <a href="{% url 'bboard:update' bb.pk %}">
-            <button type="button">Изменить</button>
+            <button type="button" class="btn btn-primary">Изменить</button>
         </a>
         <a href="{% url 'bboard:delete' bb.pk %}">
-            <button type="button">Удалить</button>
+            <button type="button" class="btn btn-danger">Удалить</button>
         </a>
     </p>
 

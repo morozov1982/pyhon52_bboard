@@ -1,0 +1,555 @@
+[
+  {
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+      "action_time": "2025-12-01T15:55:41.170Z",
+      "user": 3,
+      "content_type": null,
+      "object_id": "1",
+      "object_repr": "Недвижимость",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+      "action_time": "2025-12-01T15:55:44.842Z",
+      "user": 3,
+      "content_type": null,
+      "object_id": "2",
+      "object_repr": "Транспорт",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+      "action_time": "2025-12-01T15:58:05.349Z",
+      "user": 3,
+      "content_type": null,
+      "object_id": "1",
+      "object_repr": "Объявление: Плотина",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+      "action_time": "2025-12-01T15:58:38.835Z",
+      "user": 3,
+      "content_type": null,
+      "object_id": "2",
+      "object_repr": "Объявление: Дом трёхэтажный",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+      "action_time": "2025-12-01T15:58:56.843Z",
+      "user": 3,
+      "content_type": null,
+      "object_id": "3",
+      "object_repr": "Объявление: Бобёр ездовой",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+      "action_time": "2025-12-01T15:59:17.485Z",
+      "user": 3,
+      "content_type": null,
+      "object_id": "4",
+      "object_repr": "Объявление: Тарантас",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 9,
+    "fields": {
+      "action_time": "2025-12-01T16:11:20.352Z",
+      "user": 3,
+      "content_type": null,
+      "object_id": "4",
+      "object_repr": "Объявление: Тарантас",
+      "action_flag": 2,
+      "change_message": "[]"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$1000000$ohTldYL9NnP68QKvZcDKG7$FKQiqJn3Z7ZoINA71eG1ol+I/a6ccmcHrAI3lFQ1gpU=",
+      "last_login": "2026-01-26T16:22:36.435Z",
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2025-12-01T15:00:32.408Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "nzxxzvrzxvoye6jfoeqqelfj14ris7iu",
+    "fields": {
+      "session_data": ".eJxVjMsOwiAQRf-FtSEFgWFcuu83kBkeUjU0Ke3K-O_apAvd3nPOfYlA21rD1vMSpiQu4ixOvxtTfOS2g3SndptlnNu6TCx3RR60y3FO-Xk93L-DSr1-a3KaFfLgFUXgkqx3GAcyVlufgYwDNggOQeeIaKAUl0zxWLyK3mgW7w_dATei:1vkPMK:PVwFYE2gT_6VT7saFt4DJbDCB8eNEUbLLx5PVZkRhqs",
+      "expire_date": "2026-02-09T16:22:36.440Z"
+    }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "unl8cdnh2js3v8q46btpez1isfpp5qky",
+    "fields": {
+      "session_data": ".eJxVjMsOwiAQRf-FtSEFgWFcuu83kBkeUjU0Ke3K-O_apAvd3nPOfYlA21rD1vMSpiQu4ixOvxtTfOS2g3SndptlnNu6TCx3RR60y3FO-Xk93L-DSr1-a3KaFfLgFUXgkqx3GAcyVlufgYwDNggOQeeIaKAUl0zxWLyK3mgW7w_dATei:1vQ6Bz:TxvldtCkB7-nYqgWna1XeofrIbdyUND7oGs0xa0Oznk",
+      "expire_date": "2025-12-15T15:51:59.870Z"
+    }
+  },
+  {
+    "model": "captcha.captchastore",
+    "pk": 2,
+    "fields": {
+      "challenge": "YNTC",
+      "response": "yntc",
+      "hashkey": "aa773c8b45e3e7b47cc887ae339f9d4fcf6ac42e",
+      "expiration": "2026-02-09T15:47:33.480Z"
+    }
+  },
+  {
+    "model": "captcha.captchastore",
+    "pk": 3,
+    "fields": {
+      "challenge": "NBAI",
+      "response": "nbai",
+      "hashkey": "47afe3d7d26b16e6ca866c09656ca41e5b9fccd1",
+      "expiration": "2026-02-09T15:47:57.660Z"
+    }
+  },
+  {
+    "model": "captcha.captchastore",
+    "pk": 4,
+    "fields": {
+      "challenge": "7-6=",
+      "response": "1",
+      "hashkey": "467b85d4e007fa9a567c4c07f9494ae1183f6237",
+      "expiration": "2026-02-09T15:49:37.930Z"
+    }
+  },
+  {
+    "model": "captcha.captchastore",
+    "pk": 5,
+    "fields": {
+      "challenge": "9-6=",
+      "response": "3",
+      "hashkey": "203da9e98e90301d7d009ac629eef052cd9b012c",
+      "expiration": "2026-02-09T15:49:45.588Z"
+    }
+  },
+  {
+    "model": "captcha.captchastore",
+    "pk": 6,
+    "fields": {
+      "challenge": "2+2=",
+      "response": "4",
+      "hashkey": "c4490940d430abb6d720d32772621bd6732622e0",
+      "expiration": "2026-02-09T15:49:49.945Z"
+    }
+  },
+  {
+    "model": "captcha.captchastore",
+    "pk": 7,
+    "fields": {
+      "challenge": "1+9=",
+      "response": "10",
+      "hashkey": "a963746791e8a576f24f1df78c075ada01cd933a",
+      "expiration": "2026-02-09T15:49:56.474Z"
+    }
+  },
+  {
+    "model": "captcha.captchastore",
+    "pk": 8,
+    "fields": {
+      "challenge": "KYQGKZUJ",
+      "response": "kyqgkzuj",
+      "hashkey": "8452b797b95a193893e8429526cad24b1d14e0d4",
+      "expiration": "2026-02-09T16:06:18.885Z"
+    }
+  },
+  {
+    "model": "captcha.captchastore",
+    "pk": 9,
+    "fields": {
+      "challenge": "THABHWSY",
+      "response": "thabhwsy",
+      "hashkey": "fc3922d68f7a9e272c65b6468f39e7cc99931524",
+      "expiration": "2026-02-09T16:07:16.553Z"
+    }
+  },
+  {
+    "model": "captcha.captchastore",
+    "pk": 10,
+    "fields": {
+      "challenge": "VVOAQLNP",
+      "response": "vvoaqlnp",
+      "hashkey": "cd57e40b29f45ea0631982d2a6527ebaca7adde4",
+      "expiration": "2026-02-09T16:07:18.604Z"
+    }
+  },
+  {
+    "model": "captcha.captchastore",
+    "pk": 11,
+    "fields": {
+      "challenge": "ZNYXACCM",
+      "response": "znyxaccm",
+      "hashkey": "cef96ce9acd4185f5cd99fa13f7504e830f8b0cb",
+      "expiration": "2026-02-09T16:07:28.226Z"
+    }
+  },
+  {
+    "model": "captcha.captchastore",
+    "pk": 12,
+    "fields": {
+      "challenge": "YFQLKWJJ",
+      "response": "yfqlkwjj",
+      "hashkey": "ac5bcc0c4b2b0e7fadc73ee47ea5600b62339e24",
+      "expiration": "2026-02-09T16:07:29.324Z"
+    }
+  },
+  {
+    "model": "captcha.captchastore",
+    "pk": 13,
+    "fields": {
+      "challenge": "BWNYQEGB",
+      "response": "bwnyqegb",
+      "hashkey": "6da1cd23f3cfd4f657b0df82de0e09983973a568",
+      "expiration": "2026-02-09T16:07:36.204Z"
+    }
+  },
+  {
+    "model": "captcha.captchastore",
+    "pk": 14,
+    "fields": {
+      "challenge": "EWWZHETH",
+      "response": "ewwzheth",
+      "hashkey": "327be0725de6cbd482f100c228988d0cd15f125b",
+      "expiration": "2026-02-09T16:07:36.349Z"
+    }
+  },
+  {
+    "model": "captcha.captchastore",
+    "pk": 15,
+    "fields": {
+      "challenge": "VDEKXCGB",
+      "response": "vdekxcgb",
+      "hashkey": "7d0c3f173de49ffb9ff8fb4d248717b591490f08",
+      "expiration": "2026-02-09T16:07:37.442Z"
+    }
+  },
+  {
+    "model": "captcha.captchastore",
+    "pk": 16,
+    "fields": {
+      "challenge": "GHLEKWAO",
+      "response": "ghlekwao",
+      "hashkey": "6e60121207f68eb3b612d2260352f4299f18811c",
+      "expiration": "2026-02-09T16:08:31.785Z"
+    }
+  },
+  {
+    "model": "captcha.captchastore",
+    "pk": 17,
+    "fields": {
+      "challenge": "AYAYTPEZ",
+      "response": "ayaytpez",
+      "hashkey": "a9ee0a394a8f73d90c2785300028784318a6258d",
+      "expiration": "2026-02-09T16:08:51.162Z"
+    }
+  },
+  {
+    "model": "captcha.captchastore",
+    "pk": 18,
+    "fields": {
+      "challenge": "HDROCRDN",
+      "response": "hdrocrdn",
+      "hashkey": "612c6cb571d27a82f65d144042a02e55d9e4a9b6",
+      "expiration": "2026-02-09T16:08:52.095Z"
+    }
+  },
+  {
+    "model": "captcha.captchastore",
+    "pk": 19,
+    "fields": {
+      "challenge": "BTVBCMWN",
+      "response": "btvbcmwn",
+      "hashkey": "119f1b35f89cafc05d549fa7be640d462b27437a",
+      "expiration": "2026-02-09T16:09:46.526Z"
+    }
+  },
+  {
+    "model": "captcha.captchastore",
+    "pk": 20,
+    "fields": {
+      "challenge": "JPLKHGHK",
+      "response": "jplkhghk",
+      "hashkey": "3e402d27d18ea419d8380e7632ef04ffe1df6371",
+      "expiration": "2026-02-09T16:10:06.545Z"
+    }
+  },
+  {
+    "model": "bboard.rubric",
+    "pk": 1,
+    "fields": {
+      "name": "Недвижимость",
+      "order": 3
+    }
+  },
+  {
+    "model": "bboard.rubric",
+    "pk": 2,
+    "fields": {
+      "name": "Транспорт",
+      "order": 8
+    }
+  },
+  {
+    "model": "bboard.rubric",
+    "pk": 3,
+    "fields": {
+      "name": "Бытовая техника",
+      "order": 1
+    }
+  },
+  {
+    "model": "bboard.rubric",
+    "pk": 4,
+    "fields": {
+      "name": "Сельхозинвентарь",
+      "order": 7
+    }
+  },
+  {
+    "model": "bboard.rubric",
+    "pk": 5,
+    "fields": {
+      "name": "Мебель",
+      "order": 2
+    }
+  },
+  {
+    "model": "bboard.rubric",
+    "pk": 6,
+    "fields": {
+      "name": "Сантехника",
+      "order": 5
+    }
+  },
+  {
+    "model": "bboard.rubric",
+    "pk": 7,
+    "fields": {
+      "name": "Растения",
+      "order": 4
+    }
+  },
+  {
+    "model": "bboard.bb",
+    "pk": 1,
+    "fields": {
+      "kind": "s",
+      "title": "Плотина",
+      "content": "Строил дикий бобёр",
+      "price": "1006.00",
+      "published": "2025-12-01T15:58:05.348Z",
+      "rubric": 1
+    }
+  },
+  {
+    "model": "bboard.bb",
+    "pk": 2,
+    "fields": {
+      "kind": "s",
+      "title": "Земельный участок",
+      "content": "Большой",
+      "price": "100000.00",
+      "published": "2025-12-01T15:58:38.834Z",
+      "rubric": 1
+    }
+  },
+  {
+    "model": "bboard.bb",
+    "pk": 3,
+    "fields": {
+      "kind": "s",
+      "title": "Бобёр ездовой",
+      "content": "Просто ракета",
+      "price": "2347322.00",
+      "published": "2025-12-01T15:58:56.842Z",
+      "rubric": 2
+    }
+  },
+  {
+    "model": "bboard.bb",
+    "pk": 4,
+    "fields": {
+      "kind": "s",
+      "title": "Тарантас",
+      "content": "Не путать с тарантайкой",
+      "price": "234612.00",
+      "published": "2025-12-01T15:59:17.484Z",
+      "rubric": 2
+    }
+  },
+  {
+    "model": "bboard.bb",
+    "pk": 5,
+    "fields": {
+      "kind": "s",
+      "title": "Диван",
+      "content": "Продавленный",
+      "price": "100.00",
+      "published": "2025-12-08T15:10:55.246Z",
+      "rubric": 5
+    }
+  },
+  {
+    "model": "bboard.bb",
+    "pk": 6,
+    "fields": {
+      "kind": "s",
+      "title": "Раковина",
+      "content": "Сильно битая",
+      "price": "50.00",
+      "published": "2025-12-08T15:37:15.549Z",
+      "rubric": 6
+    }
+  },
+  {
+    "model": "bboard.bb",
+    "pk": 7,
+    "fields": {
+      "kind": "s",
+      "title": "Мотыга",
+      "content": "Ржавая",
+      "price": "20.00",
+      "published": "2025-12-08T15:43:21.029Z",
+      "rubric": 4
+    }
+  },
+  {
+    "model": "bboard.bb",
+    "pk": 8,
+    "fields": {
+      "kind": "s",
+      "title": "Лопата",
+      "content": "Почти новая",
+      "price": "1000.00",
+      "published": "2025-12-08T15:46:21.989Z",
+      "rubric": 4
+    }
+  },
+  {
+    "model": "testapp.advuser",
+    "pk": 1,
+    "fields": {
+      "is_activated": false,
+      "user": 3
+    }
+  },
+  {
+    "model": "testapp.spare",
+    "pk": 1,
+    "fields": {
+      "name": "Болт"
+    }
+  },
+  {
+    "model": "testapp.spare",
+    "pk": 2,
+    "fields": {
+      "name": "Гайка"
+    }
+  },
+  {
+    "model": "testapp.spare",
+    "pk": 3,
+    "fields": {
+      "name": "Шайба"
+    }
+  },
+  {
+    "model": "testapp.spare",
+    "pk": 4,
+    "fields": {
+      "name": "Шпилька"
+    }
+  },
+  {
+    "model": "testapp.machine",
+    "pk": 1,
+    "fields": {
+      "name": "Самосвал"
+    }
+  },
+  {
+    "model": "testapp.machine",
+    "pk": 2,
+    "fields": {
+      "name": "Тепловоз"
+    }
+  },
+  {
+    "model": "testapp.kit",
+    "pk": 1,
+    "fields": {
+      "machine": 1,
+      "spare": 1,
+      "count": 5
+    }
+  },
+  {
+    "model": "testapp.kit",
+    "pk": 2,
+    "fields": {
+      "machine": 1,
+      "spare": 2,
+      "count": 100
+    }
+  },
+  {
+    "model": "testapp.kit",
+    "pk": 4,
+    "fields": {
+      "machine": 2,
+      "spare": 1,
+      "count": 49
+    }
+  },
+  {
+    "model": "testapp.kit",
+    "pk": 5,
+    "fields": {
+      "machine": 2,
+      "spare": 3,
+      "count": 49
+    }
+  }
+]
