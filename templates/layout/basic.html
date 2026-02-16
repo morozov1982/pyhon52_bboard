@@ -1,4 +1,5 @@
 {% load static %}
+{% load django_bootstrap5 %}
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -6,7 +7,8 @@
     <meta charset="UTF-8">
     <title>{% block title %}Главная{% endblock %} :: Доска объявлений</title>
 
-    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" crossorigin="anonymous">
+    {# <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" crossorigin="anonymous"> #}
+    {% bootstrap_css %}
 
     {% static 'style.css' as css_url %}
     {# <link rel="stylesheet" href="{% static 'style.css' %}"> #}
@@ -27,7 +29,8 @@
     </section>
 
 
-<script src="{% static 'bootstrap/js/bootstrap.min.js' %}" crossorigin="anonymous"></script>
+{# <script src="{% static 'bootstrap/js/bootstrap.min.js' %}" crossorigin="anonymous"></script> #}
+{% bootstrap_javascript %}
 
 </body>
 </html>

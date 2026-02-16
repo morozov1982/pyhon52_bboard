@@ -1,13 +1,16 @@
 {% extends "layout/basic.html" %}
 
+{% load django_bootstrap5 %}
+
 {% block title %}Изменение объявления{% endblock %}
 
 {% block content %}
     <h2>Изменение объявления</h2>
 
-    <form method="post">
+    <form method="post" class="form">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Сохранить</button>
+        {% bootstrap_form form %}
+        {% bootstrap_button button_type="submit" size="sm" content="Сохранить" %}
+        {% bootstrap_button button_type="reset" size="sm" button_class="btn-secondary" content="Отменить" %}
     </form>
 {% endblock %}

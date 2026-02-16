@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'captcha',
     'precise_bbcode',
+    'django_bootstrap5',
 
     'bboard',
     'testapp',

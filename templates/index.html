@@ -1,6 +1,7 @@
 {% extends "layout/basic.html" %}
 
 {% load bbcode_tags %}
+{% load django_bootstrap5 %}
 
 {% block content %}
 
@@ -23,6 +24,7 @@
     </div>
     {% endfor %}
 
+{% comment %}
     {% if page.has_other_pages %}
     <nav aria-label="pagination">
         <ul class="pagination pagination-sm justify-content-center">
@@ -53,5 +55,8 @@
         </ul>
     </nav>
     {% endif %}
+{% endcomment %}
+
+{% bootstrap_pagination page size="sm" %}
 
 {% endblock %}
