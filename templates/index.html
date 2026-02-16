@@ -1,5 +1,7 @@
 {% extends "layout/basic.html" %}
 
+{% load bbcode_tags %}
+
 {% block content %}
 
     {% for bb in bbs %}
@@ -9,7 +11,10 @@
                 {{ bb.title_and_price }}
             </a>
         </h2>
-        <p>{{ bb.content }}</p>
+        {# <p>{{ bb.content }}</p> #}
+        <p>{% bbcode bb.content %}</p>
+        <hr>
+        <p>{{ bb.content|bbcode|safe }}</p>
         <p>
             <a href="{% url 'bboard:by_rubric' bb.rubric.pk %}">
                 {{ bb.rubric.name }}</a>
