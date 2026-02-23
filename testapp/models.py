@@ -4,6 +4,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models import CASCADE
 
+from bboard.models import get_timestamp_path
+
 
 class AdvUser(models.Model):
     is_activated = models.BooleanField(
@@ -71,3 +73,17 @@ class Note(models.Model):
 #
 #     class Meta(Message.Meta):
 #         ordering = ['order', 'name']
+
+class Img(models.Model):
+    img = models.ImageField(
+        verbose_name='Изображение',
+        upload_to=get_timestamp_path,
+    )
+
+    desc = models.TextField(
+        verbose_name='Описание',
+    )
+
+    class Meta:
+        verbose_name = 'Изображение'
+        verbose_name_plural = 'Изображения'

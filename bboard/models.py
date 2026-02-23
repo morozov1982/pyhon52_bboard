@@ -1,7 +1,13 @@
+from datetime import datetime
+from os.path import splitext
+
 from django.core import validators
 from django.core.exceptions import ValidationError
 from django.db import models
 
+
+def get_timestamp_path(instance, filename):
+    return f'{datetime.now().timestamp()}{splitext(filename)[1]}'
 
 class RubricQuerySet(models.QuerySet):
     def order_by_bb_count(self):
@@ -136,6 +142,9 @@ class Bb(models.Model):
         on_delete=models.PROTECT,
         verbose_name='Рубрика',
     )
+
+    # archive = models.FileField(upload_to='archives/%Y/%m/%d/')
+    # archive = models.FileField(upload_to=get_timestamp_path)
 
     objects = models.Manager()
     by_price = BbManager()

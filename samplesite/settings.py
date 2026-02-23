@@ -146,10 +146,11 @@ DEFAULT_CHARSET = 'utf-8'
 STATIC_URL = 'static/'
 # STATIC_ROOT = 'static/'
 STATICFILES_DIRS = [
-    # os.path.join(BASE_DIR, 'static'),
     BASE_DIR / 'static',
-    # ('images', BASE_DIR / 'images'),
 ]
+
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -172,3 +173,5 @@ CAPTCHA_IMAGE_SIZE = (600, 250)
 # precise_bbcode
 BBCODE_NEWLINE = '<br>'
 BBCODE_SMILIES_UPLOAD_TO = BASE_DIR / 'static/precise_bbcode/smilies'
+
+# FILE_UPLOAD_MAX_MEMORY_SIZE = 2_621_440
