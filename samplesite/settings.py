@@ -44,6 +44,9 @@ INSTALLED_APPS = [
 
     'bboard',
     'testapp',
+
+    'easy_thumbnails',
+    'django_cleanup',
 ]
 
 MIDDLEWARE = [
@@ -175,3 +178,40 @@ BBCODE_NEWLINE = '<br>'
 BBCODE_SMILIES_UPLOAD_TO = BASE_DIR / 'static/precise_bbcode/smilies'
 
 # FILE_UPLOAD_MAX_MEMORY_SIZE = 2_621_440
+
+
+# easy-thumbnail
+THUMBNAIL_ALIASES = {
+    'bboard.Bb.picture': {
+        'default': {
+            'size': (500, 300),
+            'crop': 'scale',
+        },
+    },
+    'testapp': {
+        'default': {
+            'size': (400, 300),
+            'crop': 'smart',
+            'bw': True,
+        },
+    },
+    '': {
+        'default': {
+            'size': (180, 240),
+            'crop': 'scale',
+        },
+        'big': {
+            'size': (480, 640),
+            'crop': '10,10',
+        },
+    },
+}
+
+THUMBNAIL_DEFAULT_OPTIONS = {
+    'quality': 90,
+    'subsampling': 1,
+}
+
+THUMBNAIL_MEDIA_ROOT =  ''
+THUMBNAIL_MEDIA_URL = '/thumbs/'
+THUMBNAIL_BASEDIR = 'thumbs'
