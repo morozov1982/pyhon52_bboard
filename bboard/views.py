@@ -19,7 +19,7 @@ from bboard.models import Bb, Rubric
 
 
 def index(request):
-    rubrics = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
+    # rubrics = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
 
     bbs = Bb.objects.all()
     paginator = Paginator(bbs, 2)
@@ -31,7 +31,8 @@ def index(request):
 
     page = paginator.get_page(page_num)
 
-    context = {'bbs': page.object_list, 'page': page, 'rubrics': rubrics}
+    # context = {'bbs': page.object_list, 'page': page, 'rubrics': rubrics}
+    context = {'bbs': page.object_list, 'page': page}
     return render(request, 'index.html', context)
 
 
@@ -39,7 +40,7 @@ def by_rubric(request, rubric_id):
     # bbs = get_list_or_404(Bb, rubric_id)
     bbs = Bb.objects.filter(rubric=rubric_id)
     # rubrics = Rubric.objects.all()
-    rubrics = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
+    # rubrics = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
     current_rubric = Rubric.objects.get(pk=rubric_id)
     context = {'bbs': bbs, 'rubrics': rubrics, 'current_rubric':current_rubric}
 
@@ -136,7 +137,7 @@ class BbCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['rubrics'] = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
+        # context['rubrics'] = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
         return context
 
 
@@ -148,7 +149,7 @@ class BbUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['rubrics'] = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
+        # context['rubrics'] = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
         return context
 
 
@@ -158,7 +159,7 @@ class BbDeleteView(DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['rubrics'] = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
+        # context['rubrics'] = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
         return context
 
 
@@ -182,7 +183,7 @@ class BbRubricBbsView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['rubrics'] = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
+        # context['rubrics'] = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
         context['current_rubric'] = Rubric.objects.get(pk=self.kwargs['rubric_id'])
         return context
 
@@ -190,7 +191,7 @@ class BbRubricBbsView(ListView):
 def bb_detail(request, bb_id):
     bb = get_object_or_404(Bb, pk=bb_id)
 
-    rubrics = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
+    # rubrics = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
     context = {'bb': bb, 'rubrics': rubrics}
 
     return render(request, 'bb_detail.html', context)
@@ -201,7 +202,7 @@ class BbDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['rubrics'] = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
+        # context['rubrics'] = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
         return context
 
 
