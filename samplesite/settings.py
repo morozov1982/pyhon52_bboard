@@ -220,3 +220,20 @@ THUMBNAIL_DEFAULT_OPTIONS = {
 THUMBNAIL_MEDIA_ROOT =  ''
 THUMBNAIL_MEDIA_URL = '/thumbs/'
 THUMBNAIL_BASEDIR = 'thumbs'
+
+
+# SESSIONS
+# SESSION_ENGINE = "django.contrib.sessions.backends.db"  # по умолчанию
+# SESSION_ENGINE = "django.contrib.sessions.backends.file"
+# SESSION_ENGINE = "django.contrib.sessions.backends.cache"
+# SESSION_ENGINE = "django.contrib.sessions.backends.cache_db"
+# SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+
+# MESSAGES
+# MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+# MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+# MESSAGE_STORAGE = 'django.contrib.messages.storage.fallback.FallbackStorage'  # по умолчанию
+
+# from django.contrib import messages
+# MESSAGE_LEVEL = 20
+# MESSAGE_LEVEL = messages.DEBUG

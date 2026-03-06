@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
 from django.db.models import Count
 from django.forms import inlineformset_factory
@@ -13,6 +14,7 @@ from django.views.generic import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.decorators.http import require_GET, require_POST, require_safe, require_http_methods
+from django.contrib import messages
 
 from bboard.forms import BbForm, RubricFormSet, SearchForm
 from bboard.models import Bb, Rubric
@@ -77,6 +79,9 @@ def add_and_save(request):
         if bbf.is_valid():
             if bbf.has_changed():
                 bbf.save()
+                messages.add_message(request, messages.SUCCESS, 'Объявление создано',
+                                     extra_tags='first second')
+                # messages.success(request, 'Объявление создано')
             return HttpResponseRedirect(reverse(
                 'bboard:by_rubric',
                 kwargs={'rubric_id': bbf.cleaned_data['rubric'].pk}))
@@ -90,55 +95,12 @@ def add_and_save(request):
         return render(request, 'create.html', context)
 
 
-# class BbCreateView(CreateView):
-#     template_name = 'create.html'
-#     form_class = BbForm
-#     # success_url = '/'
-#     success_url = reverse_lazy('index')
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         # context['rubrics'] = Rubric.objects.all()
-#         context['rubrics'] = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
-#         return context
-
-
-# class BbCreateView(View):
-#     def get(self, request, *args, **kwargs):
-#         form = BbForm()
-#         context = {'form': form, 'rubrics': Rubric.objects.all()}
-#         return render(request, 'create.html', context)
-#
-#     def post(self, request, *args, **kwargs):
-#         form = BbForm(request.POST)
-#
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponseRedirect(reverse(
-#                 'bboard:by_rubric',
-#                 kwargs={'rubric_id': form.cleaned_data['rubric'].pk}))
-#         else:
-#             context = {'form': form, 'rubrics': Rubric.objects.all()}
-#             return render(request, 'create.html', context)
-
-
-class BbCreateView(CreateView):
-# class BbCreateView(LoginRequiredMixin, CreateView):
-# class BbCreateView(UserPassesTestMixin, CreateView):
-# class BbCreateView(PermissionRequiredMixin, CreateView):
+class BbCreateView(SuccessMessageMixin, CreateView):
     template_name = 'create.html'
     form_class = BbForm
     initial = {'price': 0}
     success_url = '/'
-    # permission_required = ('bboard.add_bb', 'bboard.change_bb')
-
-    # def test_func(self):
-    #     return self.request.user.is_staff
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # context['rubrics'] = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
-        return context
+    success_message = 'Объявление о продаже товара "%(title)s" создано.'
 
 
 class BbUpdateView(UpdateView):

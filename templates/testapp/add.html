@@ -5,6 +5,9 @@
 {% block title %}Добавление изображения{% endblock %}
 
 {% block content %}
+
+    <h2>Counter: {{ counter }}</h2>
+
     <h2>Добавление изображения</h2>
 
     <form method="post" enctype="multipart/form-data">
@@ -14,12 +17,6 @@
     </form>
 
     {% for img in imgs %}
-        {# <div><img src="{{ img.img.url }}"></div> #}
-        {# <div><img src="{{ img.img|thumbnail_url:'default' }}"></div> #}
-        {# <div><img src="{% thumbnail img.img 'default' %}"></div> #}
-        {# <div><img src="{% thumbnail img.img 'default' bw=False %}"></div> #}
-        {# <div><img src="{% thumbnail img.img '300x200' crop='smart' %}"></div> #}
-
         {% thumbnail img.img 'default' as thumb %}
         <div><img src="{{ thumb.url }}"></div>
 
