@@ -237,3 +237,26 @@ THUMBNAIL_BASEDIR = 'thumbs'
 # from django.contrib import messages
 # MESSAGE_LEVEL = 20
 # MESSAGE_LEVEL = messages.DEBUG
+
+# EMAIL
+# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+# EMAIL_HOST = 'localhost'  # по умолчанию
+# EMAIL_PORT = 25
+# EMAIL_HOST_USER = ''  # имя пользователя
+# EMAIL_HOST_PASSWORD = ''  # пароль
+# EMAIL_USE_TLS = False
+# EMAIL_USE_SSL = False
+# EMAIL_SSL_CERTFILE = None
+# EMAIL_SSL_KEYFILE = None
+# EMAIL_TIMEOUT = None
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+EMAIL_FILE_PATH = BASE_DIR / 'email'
+
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
+# EMAIL_BACKEND = "django.core.mail.backends.dummy.EmailBackend"
+
+DEFAULT_FROM_EMAIL = 'webmaster@localhost'  # по умолчанию
+
+
