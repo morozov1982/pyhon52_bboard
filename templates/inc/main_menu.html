@@ -1,3 +1,5 @@
+{% load cache %}
+
 <nav>
     <a href="{% url 'bboard:index' %}">Главная</a>
     <a href="{% url 'bboard:add' %}">Добавить</a>
@@ -13,8 +15,10 @@
         <a href="{% url 'bboard:login' %}">Войти</a>
     {% endif %}
 
-    {% for rubric in rubrics %}
-        <a href="{% url 'bboard:by_rubric' rubric.pk %}">
-            {{ rubric.name }} ({{ rubric.cnt }})</a>
-    {% endfor %}
+    {% cache 60 navbar %}
+        {% for rubric in rubrics %}
+            <a href="{% url 'bboard:by_rubric' rubric.pk %}">
+                {{ rubric.name }} ({{ rubric.cnt }})</a>
+        {% endfor %}
+    {% endcache %}
 </nav>

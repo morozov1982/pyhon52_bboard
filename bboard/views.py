@@ -9,6 +9,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.template.loader import get_template, render_to_string
 from django.urls import reverse_lazy, reverse
+from django.views.decorators.cache import cache_page, never_cache
+from django.views.decorators.vary import vary_on_headers, vary_on_cookie
 from django.views.generic.base import View, TemplateView
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
@@ -20,6 +22,12 @@ from bboard.forms import BbForm, RubricFormSet, SearchForm
 from bboard.models import Bb, Rubric
 
 
+# @cache_page(60 * 1)
+# @vary_on_headers('User-Agent')
+# @vary_on_headers('Cookie')
+# @vary_on_headers('User-Agent', 'Cookie')
+# @vary_on_cookie
+# @never_cache
 def index(request):
     # rubrics = Rubric.objects.annotate(cnt=Count('bb')).filter(cnt__gt=0)
 
