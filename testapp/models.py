@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
@@ -87,3 +87,19 @@ class Img(models.Model):
     class Meta:
         verbose_name = 'Изображение'
         verbose_name_plural = 'Изображения'
+
+
+# class Profile(models.Model):
+#     phone = models.CharField(max_length=20)
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+
+# class AdvUser(AbstractUser):
+#     phone = models.CharField(max_length=20)
+
+
+# class AdvUser(User):
+#     phone = models.CharField(max_length=20)
+#
+#     class Meta:
+#         proxy = True

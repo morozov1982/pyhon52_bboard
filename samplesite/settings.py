@@ -9,18 +9,22 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
+import environ
 import os.path
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = environ.Env()
+environ.Env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-h%hc0u$tg&nes(!hs&o+*lu=(4^aq*+$7b$jt+*^af-#6e#1b-'
+# SECRET_KEY = 'django-insecure-h%hc0u$tg&nes(!hs&o+*lu=(4^aq*+$7b$jt+*^af-#6e#1b-'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -115,6 +119,17 @@ DATABASES = {
 #         "PORT": "5433",
 #     }
 # }
+#
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": env('NAME'),
+#         "USER": env('USER'),
+#         "PASSWORD": env('PASSWORD'),
+#         "HOST": "127.0.0.1",
+#         "PORT": "5433",
+#     }
+# }
 
 
 # Password validation
@@ -136,6 +151,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+# AUTH_USER_MODEL = 'testapp.models.AdvUser'
 
 
 # Internationalization
