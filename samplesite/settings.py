@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'captcha',
     'precise_bbcode',
     'django_bootstrap5',
+    'rest_framework',
+    'corsheaders',
 
     'bboard',
     'testapp',
@@ -58,6 +60,8 @@ MIDDLEWARE = [
 
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
 
@@ -303,3 +307,15 @@ CACHES = {
 }
 
 CACHE_MIDDLEWARE_SECONDS = 60
+
+
+### DRF (CORS) ###
+CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOWED_ORIGINS = [
+#     'http://www.bboard.kz',
+#     'https://www.bboard.kz',
+# ]
+# CORS_ALLOW_METHODS = [
+#     'GET',
+#     'POST',
+# ]

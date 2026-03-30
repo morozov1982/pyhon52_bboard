@@ -4,11 +4,17 @@ from django.views.decorators.cache import cache_page
 
 from bboard.views import (index,
                           BbCreateView, BbRubricBbsView,
-                          BbDetailView, BbUpdateView, BbDeleteView, rubrics, bbs, search)
+                          BbDetailView, BbUpdateView, BbDeleteView,
+                          rubrics, bbs, search,
+                          api_rubrics, api_rubric_detail)
 
 app_name = 'bboard'
 
 urlpatterns = [
+    path('api/v1/rubrics/<int:pk>/', api_rubric_detail),
+    path('api/v1/rubrics/', api_rubrics),
+
+
     path('add/', BbCreateView.as_view(), name='add'),
 
     path('rubrics/', rubrics, name='rubrics'),
