@@ -1,19 +1,28 @@
 from django.contrib.auth.views import LoginView, LogoutView
-from django.urls import path
+from django.urls import path, include
 from django.views.decorators.cache import cache_page
+from rest_framework.routers import DefaultRouter
 
 from bboard.views import (index,
                           BbCreateView, BbRubricBbsView,
                           BbDetailView, BbUpdateView, BbDeleteView,
                           rubrics, bbs, search,
-                          api_rubrics, api_rubric_detail)
+                          api_rubrics, api_rubric_detail,
+                          APIRubrics, APIRubricDetail, APIRubricViewSet)
 
 app_name = 'bboard'
 
-urlpatterns = [
-    path('api/v1/rubrics/<int:pk>/', api_rubric_detail),
-    path('api/v1/rubrics/', api_rubrics),
+router = DefaultRouter()
+router.register('rubrics', APIRubricViewSet)
 
+urlpatterns = [
+    # path('api/v1/rubrics/<int:pk>/', api_rubric_detail),
+    # path('api/v1/rubrics/', api_rubrics),
+
+    # path('api/v1/rubrics/<int:pk>/', APIRubricDetail.as_view()),
+    # path('api/v1/rubrics/', APIRubrics.as_view()),
+
+    path('api/v1/', include(router.urls)),
 
     path('add/', BbCreateView.as_view(), name='add'),
 

@@ -63,7 +63,7 @@ MIDDLEWARE = [
 
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
+    # 'django.middleware.cache.FetchFromCacheMiddleware',
 
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -284,29 +284,29 @@ EMAIL_FILE_PATH = BASE_DIR / 'email'
 
 DEFAULT_FROM_EMAIL = 'webmaster@localhost'  # по умолчанию
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-        # 'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        # 'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        # 'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',  # Удалён
-        # 'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+#         # 'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+#         # 'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+#         # 'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',  # Удалён
+#         # 'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+#
+#         'LOCATION': 'cache1',
+#         'TIMEOUT': 60,
+#         'OPTIONS': {
+#             'MAX_ENTRIES': 200,
+#         },
+#         # 'VERSION': 1,
+#     },
+#     # 'special': {
+#     #     'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+#     #
+#     #     'LOCATION': 'cache2',
+#     # }
+# }
 
-        'LOCATION': 'cache1',
-        'TIMEOUT': 60,
-        'OPTIONS': {
-            'MAX_ENTRIES': 200,
-        },
-        # 'VERSION': 1,
-    },
-    # 'special': {
-    #     'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-    #
-    #     'LOCATION': 'cache2',
-    # }
-}
-
-CACHE_MIDDLEWARE_SECONDS = 1
+# CACHE_MIDDLEWARE_SECONDS = 1
 
 
 ### DRF (CORS) ###
@@ -319,3 +319,9 @@ CORS_ORIGIN_ALLOW_ALL = True
 #     'GET',
 #     'POST',
 # ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    )
+}
