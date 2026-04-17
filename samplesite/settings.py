@@ -29,7 +29,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -324,4 +324,84 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     )
+}
+
+### Logging ###
+def info_filter(message):
+    return message.levelname == 'INFO'
+
+LOGGING = {
+    'version': 1,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+        'info_filter': {
+            '()': 'django.utils.log.CallbackFilter',
+            'callback': info_filter,
+        },
+    },
+    'formatters': {
+        'simple': {
+            'style': '{',  # '%', '$' -> $asctime
+            # 'format': '[%(asctime)s] %(levelname)s: %(message)s',
+            # 'format': '[{asctime}] {levelname}: {message}',
+            'format': '{site_name}. [{asctime}] {levelname}: {message}',
+            'datefmt': '%Y.%m.%d %H:%M:%S',
+            'defaults': {'site_name': 'Доска объявлений'}
+        }
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',  # выводит в консоль
+            'level': 'ERROR',
+            'formatter': 'simple',
+            'filters': ['require_debug_true'],
+        },
+        'file_lesson': {
+            # 'class': 'logging.FileHandler',  # выводит в файл
+            # 'class': 'logging.handlers.RotatingFileHandler',  # выводит в файлы
+            'class': 'logging.handlers.TimedRotatingFileHandler',  # выводит в файлы
+            'level': 'INFO',
+            # 'filename': r'd:/logs/django-site.log',
+            'filename': BASE_DIR / 'logs/django-site.log',
+            # 'maxBytes': 1_048_576,
+            'backupCount': 10,
+            'when': 'D',  # 'S', 'M', 'H', 'D', 'W<номер дня недели>', 'midnight'
+            'interval': 10,
+            'utc': True,
+        },
+
+        'console_dev': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+            'filters': ['require_debug_true'],
+        },
+        'console_prod': {
+            'class': 'logging.StreamHandler',
+            'level': 'ERROR',
+            'formatter': 'simple',
+            'filters': ['require_debug_false'],
+        },
+        'file': {
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': BASE_DIR / 'logs/django-site.log',
+            'maxBytes': 1_048_576,
+            'backupCount': 10,
+            'formatter': 'simple',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console_dev', 'console_prod']
+        },
+        'django.server': {
+            'handlers': ['file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
 }
