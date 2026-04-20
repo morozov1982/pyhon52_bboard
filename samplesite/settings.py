@@ -27,9 +27,9 @@ environ.Env.read_env()
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -88,12 +88,6 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'bboard.middleware.rubrics',
             ],
-            # 'libraries': {
-            #     'bbtags': 'bboard.templatetags.bbtags',
-            # },
-            # 'builtins': [
-            #     'bboard.templatetags.bbtags',
-            # ],
         },
     },
 ]
@@ -104,36 +98,24 @@ WSGI_APPLICATION = 'samplesite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        # 'ATOMIC_REQUEST': False,
-        # 'AUTOCOMMIT': True,
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "postgres",
+        "USER": "postgres",
+        "PASSWORD": "1234",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
     }
 }
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "postgres",
-#         "USER": "postgres",
-#         "PASSWORD": "1234",
-#         "HOST": "127.0.0.1",
-#         "PORT": "5433",
-#     }
-# }
-#
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": env('NAME'),
-#         "USER": env('USER'),
-#         "PASSWORD": env('PASSWORD'),
-#         "HOST": "127.0.0.1",
-#         "PORT": "5433",
-#     }
-# }
 
 
 # Password validation
@@ -207,9 +189,6 @@ CAPTCHA_IMAGE_SIZE = (600, 250)
 BBCODE_NEWLINE = '<br>'
 BBCODE_SMILIES_UPLOAD_TO = BASE_DIR / 'static/precise_bbcode/smilies'
 
-# FILE_UPLOAD_MAX_MEMORY_SIZE = 2_621_440
-
-
 # easy-thumbnail
 THUMBNAIL_ALIASES = {
     'bboard.Bb.picture': {
@@ -246,79 +225,13 @@ THUMBNAIL_MEDIA_ROOT =  ''
 THUMBNAIL_MEDIA_URL = '/thumbs/'
 THUMBNAIL_BASEDIR = 'thumbs'
 
-
-# SESSIONS
-# SESSION_ENGINE = "django.contrib.sessions.backends.db"  # по умолчанию
-# SESSION_ENGINE = "django.contrib.sessions.backends.file"
-# SESSION_ENGINE = "django.contrib.sessions.backends.cache"
-# SESSION_ENGINE = "django.contrib.sessions.backends.cache_db"
-# SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
-
-# MESSAGES
-# MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
-# MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
-# MESSAGE_STORAGE = 'django.contrib.messages.storage.fallback.FallbackStorage'  # по умолчанию
-
-# from django.contrib import messages
-# MESSAGE_LEVEL = 20
-# MESSAGE_LEVEL = messages.DEBUG
-
-# EMAIL
-# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-# EMAIL_HOST = 'localhost'  # по умолчанию
-# EMAIL_PORT = 25
-# EMAIL_HOST_USER = ''  # имя пользователя
-# EMAIL_HOST_PASSWORD = ''  # пароль
-# EMAIL_USE_TLS = False
-# EMAIL_USE_SSL = False
-# EMAIL_SSL_CERTFILE = None
-# EMAIL_SSL_KEYFILE = None
-# EMAIL_TIMEOUT = None
-
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
 EMAIL_FILE_PATH = BASE_DIR / 'email'
 
-# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-# EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
-# EMAIL_BACKEND = "django.core.mail.backends.dummy.EmailBackend"
-
 DEFAULT_FROM_EMAIL = 'webmaster@localhost'  # по умолчанию
-
-# CACHES = {
-#     'default': {
-#         'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-#         # 'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-#         # 'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-#         # 'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',  # Удалён
-#         # 'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-#
-#         'LOCATION': 'cache1',
-#         'TIMEOUT': 60,
-#         'OPTIONS': {
-#             'MAX_ENTRIES': 200,
-#         },
-#         # 'VERSION': 1,
-#     },
-#     # 'special': {
-#     #     'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-#     #
-#     #     'LOCATION': 'cache2',
-#     # }
-# }
-
-# CACHE_MIDDLEWARE_SECONDS = 1
-
 
 ### DRF (CORS) ###
 CORS_ORIGIN_ALLOW_ALL = True
-# CORS_ALLOWED_ORIGINS = [
-#     'http://www.bboard.kz',
-#     'https://www.bboard.kz',
-# ]
-# CORS_ALLOW_METHODS = [
-#     'GET',
-#     'POST',
-# ]
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
@@ -346,9 +259,7 @@ LOGGING = {
     },
     'formatters': {
         'simple': {
-            'style': '{',  # '%', '$' -> $asctime
-            # 'format': '[%(asctime)s] %(levelname)s: %(message)s',
-            # 'format': '[{asctime}] {levelname}: {message}',
+            'style': '{',
             'format': '{site_name}. [{asctime}] {levelname}: {message}',
             'datefmt': '%Y.%m.%d %H:%M:%S',
             'defaults': {'site_name': 'Доска объявлений'}
@@ -362,13 +273,9 @@ LOGGING = {
             'filters': ['require_debug_true'],
         },
         'file_lesson': {
-            # 'class': 'logging.FileHandler',  # выводит в файл
-            # 'class': 'logging.handlers.RotatingFileHandler',  # выводит в файлы
-            'class': 'logging.handlers.TimedRotatingFileHandler',  # выводит в файлы
+           'class': 'logging.handlers.TimedRotatingFileHandler',  # выводит в файлы
             'level': 'INFO',
-            # 'filename': r'd:/logs/django-site.log',
             'filename': BASE_DIR / 'logs/django-site.log',
-            # 'maxBytes': 1_048_576,
             'backupCount': 10,
             'when': 'D',  # 'S', 'M', 'H', 'D', 'W<номер дня недели>', 'midnight'
             'interval': 10,
